@@ -64,6 +64,28 @@ const getCityWeather = (cityName: string) => async (dispatch: AppDispatch) => {
     throw new Error(error.message);
   }
 };
+const refreshCityWeather = (cityName: string) => async (dispatch: AppDispatch) => {
+  try {
+    const res = await axios.get(`data/2.5/weather?q=${cityName}&appid=${APIKEY}`).then((res) => res.data);
+
+    const cityData = {
+      city: res.name,
+      data: res,
+    };
+
+    await dispatch(citiesSlice.actions.refreshCityWeather(cityData));
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
+const deleteCityWeather = (cityName: string) => async (dispatch: AppDispatch) => {
+  try {
+  
+    await dispatch(citiesSlice.actions.deleteCityWeather(cityName));
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
+};
 
 // const getCityWeather = () => (dispatch:AppDispatch) => {
 //   dispatch(getCityRequest());
@@ -73,4 +95,4 @@ const getCityWeather = (cityName: string) => async (dispatch: AppDispatch) => {
 //     .catch((error: AxiosError) => dispatch(getCityError(error.message)));
 // };
 
-export { getCityWeather };
+export { getCityWeather, refreshCityWeather, deleteCityWeather };

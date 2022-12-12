@@ -1,10 +1,21 @@
 import React from "react";
 import { Card, CardContent, Typography, CardActions, Button } from "@mui/material";
 import { DeleteOutline, RefreshOutlined } from "@mui/icons-material";
+import { deleteCityWeather, refreshCityWeather } from "../redux/cities/citiesOperations";
+import { useAppDispatch } from "../redux/hooks";
 
 const CityCard = ({ ...props }) => {
-    const{city}=props
-    // console.log(props);
+  const dispatch = useAppDispatch();
+  const { city } = props;
+  // console.log(props);
+  
+  const handleDeleteCity = () => {
+    dispatch(deleteCityWeather(props.city));
+  };
+  const handleRefreshCity = () => {
+    dispatch(refreshCityWeather(props.city));
+  };
+
   return (
     <Card sx={{ minWidth: 200, marginLeft: "10px" }}>
       <CardContent>
@@ -20,10 +31,10 @@ const CityCard = ({ ...props }) => {
         <Typography variant="body2">well meaning and kindly.</Typography>
       </CardContent>
       <CardActions sx={{ justifyContent: "space-between" }}>
-        <Button size="small">
+        <Button size="small" onClick={handleDeleteCity}>
           <DeleteOutline />
         </Button>
-        <Button size="small">
+        <Button size="small" onClick={handleRefreshCity}>
           <RefreshOutlined />
         </Button>
       </CardActions>

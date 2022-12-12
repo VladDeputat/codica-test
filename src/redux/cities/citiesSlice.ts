@@ -19,30 +19,24 @@ export const citiesSlice = createSlice({
         state.allCities = [...state.allCities, action.payload];
       } else {
         state.allCities = [...state.allCities];
-        throw new Error("You already added this city")
+        throw new Error("You already added this city");
       }
-
+    },
+    refreshCityWeather: (state, action: PayloadAction<CityObj>) => {
+      const { payload } = action;
+      const index = state.allCities.findIndex((obj: any) => obj.city === payload.city);
+      state.allCities[index] = action.payload;
+    },
+    deleteCityWeather: (state, action: PayloadAction<string>) => {
+      const { payload } = action;
+      state.allCities = state.allCities.filter((el: any) => el.city !== payload);
     },
   },
 });
 
-export const { getCityWeather } = citiesSlice.actions;
+export const { getCityWeather, deleteCityWeather } = citiesSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCities = (state: RootState) => state.cities;
 
 export default citiesSlice.reducer;
-
-// import { createAction } from "@reduxjs/toolkit";
-
-// export const getCityRequest = createAction("cities/getCityRequest");
-// export const getCitySuccess = createAction("cities/getCitySuccess");
-// export const getCityError = createAction("cities/getCityError");
-
-// export const addCityRequest = createAction("cities/addCityRequest");
-// export const addCitySuccess = createAction("cities/addCitySuccess");
-// export const addCityError = createAction("cities/addCityError");
-
-// export const deleteCityRequest = createAction("cities/deleteCityRequest");
-// export const deleteCitySuccess = createAction("cities/deleteCitySuccess");
-// export const deleteCityError = createAction("cities/deleteCityError");
