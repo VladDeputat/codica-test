@@ -5,9 +5,8 @@ import storage from "redux-persist/lib/storage";
 import citiesReducer from "./cities/citiesSlice"
 
 export const persistConfig = {
-  key: "selected",
+  key: "root",
   storage,
-  whitelist: ["cities"],
 };
 
 const persisted = persistReducer(persistConfig, citiesReducer);
