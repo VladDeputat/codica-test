@@ -1,7 +1,6 @@
 import { AppBar, Box, Button, Container, Grid, IconButton, TextField, Toolbar, Typography } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { cityWeatherApi } from "../api/api";
 import CityCard from "../components/CityCard";
 import { CityObj } from "../helpers/types";
 import { getCityWeather } from "../redux/cities/citiesOperations";

@@ -52,7 +52,7 @@ const APIKEY = "15d86838db3a3dd104d6b0c5875de11c";
 
 const getCityWeather = (cityName: string) => async (dispatch: AppDispatch) => {
   try {
-    const res = await axios.get(`data/2.5/weather?q=${cityName}&appid=${APIKEY}`).then((res) => res.data);
+    const res = await axios.get(`data/2.5/weather?q=${cityName}&appid=${APIKEY}&units=metric`).then((res) => res.data);
 
     const cityData = {
       city: res.name,
@@ -66,7 +66,7 @@ const getCityWeather = (cityName: string) => async (dispatch: AppDispatch) => {
 };
 const refreshCityWeather = (cityName: string) => async (dispatch: AppDispatch) => {
   try {
-    const res = await axios.get(`data/2.5/weather?q=${cityName}&appid=${APIKEY}`).then((res) => res.data);
+    const res = await axios.get(`data/2.5/weather?q=${cityName}&appid=${APIKEY}&units=metric`).then((res) => res.data);
 
     const cityData = {
       city: res.name,
