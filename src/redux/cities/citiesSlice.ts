@@ -1,42 +1,79 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "../store";
-import { CitiesState, CityObj } from "../../helpers/types";
+import { createSlice } from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import type { RootState } from '../store';
+import { CitiesState, CityObj } from '../../helpers/types';
 
-// Define the initial state using that type
 const initialState: CitiesState = {
   allCities: [],
-  curCity: {},
+  curCity: {
+    city: '',
+    data: {
+      weather: [
+        {
+          icon: '',
+          description: '',
+        },
+      ],
+      main: {
+        temp: 0,
+        humidity: 0,
+        pressure: 0,
+        feels_like: 0,
+      },
+      wind: {
+        deg: 0,
+        speed: 0,
+      },
+      sys: {
+        sunrise: 0,
+        sunset: 0,
+      },
+    },
+  },
 };
 
 export const citiesSlice = createSlice({
-  name: "cities",
-  // `createSlice` will infer the state type from the `initialState` argument
+  name: 'cities',
   initialState,
   reducers: {
     getCityWeather: (state, action: PayloadAction<CityObj>) => {
-      if (!state.allCities.map((cityObj: any) => cityObj.city).includes(action.payload.city)) {
+      if (
+        !state.allCities
+          .map((cityObj: CityObj) => cityObj.city)
+          .includes(action.payload.city)
+      ) {
         state.allCities = [...state.allCities, action.payload];
       } else {
         state.allCities = [...state.allCities];
-        throw new Error("You already added this city");
+        throw new Error('You already added this city');
       }
     },
     refreshCityWeather: (state, action: PayloadAction<CityObj>) => {
       const { payload } = action;
-      const index = state.allCities.findIndex((obj: any) => obj.city === payload.city);
+      const index = state.allCities.findIndex(
+        (obj: any) => obj.city === payload.city,
+      );
       state.allCities[index] = action.payload;
     },
     deleteCityWeather: (state, action: PayloadAction<string>) => {
       const { payload } = action;
-      state.allCities = state.allCities.filter((el: any) => el.city !== payload);
+      state.allCities = state.allCities.filter(
+        (el: any) => el.city !== payload,
+      );
+    },
+    getSingleCityWeather: (state, action: PayloadAction<CityObj>) => {
+      state.curCity = action.payload;
     },
   },
 });
 
-export const { getCityWeather, deleteCityWeather } = citiesSlice.actions;
+export const {
+  getCityWeather,
+  refreshCityWeather,
+  deleteCityWeather,
+  getSingleCityWeather,
+} = citiesSlice.actions;
 
-// Other code such as selectors can use the imported `RootState` type
 export const selectCities = (state: RootState) => state.cities;
 
 export default citiesSlice.reducer;

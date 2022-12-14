@@ -1,9 +1,30 @@
 export interface CitiesState {
-  allCities: object[];
-  curCity: object;
+  allCities: CityObj[];
+  curCity: CityObj;
 }
 
 export interface CityObj {
   city: string;
-  data: object;
+  data: {
+    weather: [
+      {
+        icon: string;
+        description: string;
+      },
+    ];
+    main: {
+      temp: number;
+      humidity: number;
+      pressure: number;
+      feels_like: number;
+    };
+    wind: {
+      deg: number;
+      speed: number;
+    };
+    sys: {
+      sunrise: number;
+      sunset: number;
+    };
+  };
 }
