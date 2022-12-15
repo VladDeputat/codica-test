@@ -2,24 +2,34 @@ import {
   AppBar,
   Box,
   Button,
-
   Grid,
-
   TextField,
-
   Typography,
 } from '@mui/material';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CityCard from '../components/CityCard';
+import { CityObj } from '../helpers/types';
 import { getCityWeather } from '../redux/cities/citiesOperations';
-import { selectAllCitiesData } from '../redux/cities/citiesSelectors';
+import {
+  selectAllCitiesData,
+  selectAllCitiesNames,
+} from '../redux/cities/citiesSelectors';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
-  const citiesArr = useAppSelector(selectAllCitiesData);
+  const citiesDataArr = useAppSelector(selectAllCitiesData);
+  const citiesSelected = useAppSelector(selectAllCitiesNames);
   const [query, setQuery] = useState('');
+
+  // useEffect(() => {
+  //   if (citiesSelected.length > 0) {
+  //     citiesSelected.forEach(cityName => {
+  //       dispatch(getCityWeather(cityName));
+  //     });
+  //   }
+  // }, [citiesSelected, dispatch]);
 
   const handleSearch = () => {
     dispatch(getCityWeather(query));
@@ -49,8 +59,8 @@ const HomePage = () => {
         </Grid>
       </AppBar>
       <Grid container justifyContent="center" my={10}>
-        {!!citiesArr.length && citiesArr.length > 0 ? (
-          citiesArr.map((cityObj: any) => (
+        {!!citiesDataArr.length && citiesDataArr.length > 0 ? (
+          citiesDataArr.map((cityObj: CityObj) => (
             <CityCard key={cityObj.city} {...cityObj} />
           ))
         ) : (

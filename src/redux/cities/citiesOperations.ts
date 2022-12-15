@@ -3,7 +3,7 @@ import axios from 'axios';
 import { citiesSlice } from './citiesSlice';
 
 axios.defaults.baseURL = 'https://api.openweathermap.org/';
-const APIKEY = '15d86838db3a3dd104d6b0c5875de11c';
+const APIKEY = 'f06487a6fb49cb41d66183511b6e56d2';
 
 const getCityWeather = (cityName: string) => async (dispatch: AppDispatch) => {
   try {

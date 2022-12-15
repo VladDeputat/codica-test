@@ -1,6 +1,7 @@
 export interface CitiesState {
   allCities: CityObj[];
   curCity: CityObj;
+  cityNames: string[];
 }
 
 export interface CityObj {

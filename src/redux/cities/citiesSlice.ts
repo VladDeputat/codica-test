@@ -30,6 +30,7 @@ const initialState: CitiesState = {
       },
     },
   },
+  cityNames: [],
 };
 
 export const citiesSlice = createSlice({
@@ -37,12 +38,9 @@ export const citiesSlice = createSlice({
   initialState,
   reducers: {
     getCityWeather: (state, action: PayloadAction<CityObj>) => {
-      if (
-        !state.allCities
-          .map((cityObj: CityObj) => cityObj.city)
-          .includes(action.payload.city)
-      ) {
+      if (!state.cityNames.includes(action.payload.city)) {
         state.allCities = [...state.allCities, action.payload];
+        state.cityNames = [...state.cityNames, action.payload.city];
       } else {
         state.allCities = [...state.allCities];
         throw new Error('You already added this city');
@@ -51,14 +49,17 @@ export const citiesSlice = createSlice({
     refreshCityWeather: (state, action: PayloadAction<CityObj>) => {
       const { payload } = action;
       const index = state.allCities.findIndex(
-        (obj: any) => obj.city === payload.city,
+        (obj: CityObj) => obj.city === payload.city,
       );
       state.allCities[index] = action.payload;
     },
     deleteCityWeather: (state, action: PayloadAction<string>) => {
       const { payload } = action;
       state.allCities = state.allCities.filter(
-        (el: any) => el.city !== payload,
+        (el: CityObj) => el.city !== payload,
+      );
+      state.cityNames = state.cityNames.filter(
+        cityName => cityName !== payload,
       );
     },
     getSingleCityWeather: (state, action: PayloadAction<CityObj>) => {

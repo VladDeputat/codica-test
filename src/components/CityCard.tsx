@@ -18,7 +18,6 @@ import { useAppDispatch } from '../redux/hooks';
 const CityCard = ({ ...props }) => {
   const dispatch = useAppDispatch();
   const { city, data } = props;
-  console.log(props);
 
   const handleDeleteCity = () => {
     dispatch(deleteCityWeather(props.city));
@@ -53,28 +52,6 @@ const CityCard = ({ ...props }) => {
           <Typography sx={{ textTransform: 'capitalize', textAlign: 'center' }}>
             {data.weather[0].description}
           </Typography>
-          {/* <Box>
-          <Typography component="div">
-            <p>Humidity</p>
-            {data.main.humidity}&#37;
-          </Typography>
-          <Typography component="div">
-            <p>Pressure</p>
-            {data.main.pressure}
-          </Typography>
-          <Typography component="div">
-            <p>Wind</p>
-            {getWindDirection(data.wind.deg)} {data.wind.speed} km/h
-          </Typography>
-          <Typography component="div">
-            <p>Sunrise</p>
-            {getHoursAndMinutesFromUnix(data.sys.sunrise)}
-          </Typography>
-          <Typography component="div">
-            <p>Sunset</p>
-            {getHoursAndMinutesFromUnix(data.sys.sunset)}
-          </Typography>
-        </Box> */}
         </CardContent>
       </Link>
       <CardActions sx={{ justifyContent: 'space-between' }}>
