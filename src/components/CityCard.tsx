@@ -29,7 +29,7 @@ const CityCard = ({ ...props }) => {
   return (
     <Card sx={{ minWidth: 200, marginLeft: '20px' }} data-testid="cityCard">
       <Link
-        href={city}
+        href={`/${city}`}
         sx={{ textDecoration: 'none', color: '#555555' }}
         data-testid="cardContent"
       >
