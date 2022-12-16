@@ -16,7 +16,7 @@ import citiesReducer from './cities/citiesSlice';
 export const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['cityNames'],
+  // whitelist: ['cityNames'],
 };
 
 const persisted = persistReducer(persistConfig, citiesReducer);

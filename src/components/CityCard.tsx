@@ -27,10 +27,18 @@ const CityCard = ({ ...props }) => {
   };
 
   return (
-    <Card sx={{ minWidth: 200, marginLeft: '20px' }}>
-      <Link href={city} sx={{ textDecoration: 'none', color: '#555555' }}>
+    <Card sx={{ minWidth: 200, marginLeft: '20px' }} data-testid="cityCard">
+      <Link
+        href={city}
+        sx={{ textDecoration: 'none', color: '#555555' }}
+        data-testid="cardContent"
+      >
         <CardContent>
-          <Typography sx={{ fontSize: 24, fontWeight: 500 }} color="text.main">
+          <Typography
+            sx={{ fontSize: 24, fontWeight: 500 }}
+            color="text.main"
+            data-testid="cardCityName"
+          >
             {city}
           </Typography>
           <Box sx={{ display: 'flex', textAlign: 'center' }}>
@@ -55,7 +63,11 @@ const CityCard = ({ ...props }) => {
         </CardContent>
       </Link>
       <CardActions sx={{ justifyContent: 'space-between' }}>
-        <Button size="small" onClick={handleDeleteCity}>
+        <Button
+          size="small"
+          onClick={handleDeleteCity}
+          data-testid="deleteButton"
+        >
           <DeleteOutline />
         </Button>
         <Button size="small" onClick={handleRefreshCity}>

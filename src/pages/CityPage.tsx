@@ -39,7 +39,7 @@ const CityPage = () => {
   const { city, data } = curCity;
 
   return (
-    <Box sx={{ textAlign: 'center' }}>
+    <Box sx={{ textAlign: 'center' }} data-testid="cityPageContent">
       <Typography sx={{ fontSize: 40, fontWeight: 500 }} color="text.main">
         {city}
       </Typography>

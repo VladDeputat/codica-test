@@ -47,12 +47,14 @@ const HomePage = () => {
             onChange={e => setQuery(e.target.value)}
             sx={{ bgcolor: '#eaeef5' }}
             value={query}
+            data-testid="homeInput"
           />
           <Button
             onClick={handleSearch}
             variant="contained"
             color="success"
             size="large"
+            data-testid="homeInputButton"
           >
             Add
           </Button>
