@@ -7,20 +7,20 @@ import {
   Typography,
 } from '@mui/material';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import CityCard from '../components/CityCard';
 import { CityObj } from '../helpers/types';
 import { getCityWeather } from '../redux/cities/citiesOperations';
 import {
   selectAllCitiesData,
-  selectAllCitiesNames,
+  // selectAllCitiesNames,
 } from '../redux/cities/citiesSelectors';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
   const citiesDataArr = useAppSelector(selectAllCitiesData);
-  const citiesSelected = useAppSelector(selectAllCitiesNames);
+  // const citiesSelected = useAppSelector(selectAllCitiesNames);
   const [query, setQuery] = useState('');
 
   // useEffect(() => {
